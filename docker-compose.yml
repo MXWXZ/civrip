@@ -1,0 +1,9 @@
+version: '3'
+services:
+  n2n:
+    image: imwxz/n2n-supernode
+    ports:
+      - "7654:7654/tcp"
+      - "7654:7654/udp"
+    volumes:
+      - ./community.list:/app/community.list:ro

@@ -66,62 +66,79 @@
         <translation>加密密钥：</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="236"/>
+        <location filename="../civrip.ui" line="248"/>
+        <source>Game IP:</source>
+        <translation>游戏IP：</translation>
+    </message>
+    <message>
+        <location filename="../civrip.ui" line="261"/>
+        <location filename="../civrip.cpp" line="525"/>
+        <location filename="../civrip.cpp" line="545"/>
+        <source>Inject</source>
+        <translation>注入</translation>
+    </message>
+    <message>
+        <location filename="../civrip.ui" line="274"/>
+        <source>Ping</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../civrip.ui" line="288"/>
         <source>Client Status</source>
         <translation>客户端状态</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="251"/>
+        <location filename="../civrip.ui" line="303"/>
         <source>Server:</source>
         <translation>服务器：</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="272"/>
+        <location filename="../civrip.ui" line="324"/>
         <location filename="../civrip.cpp" line="422"/>
         <location filename="../civrip.cpp" line="453"/>
         <source>DISCONN</source>
         <translation>未连接</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="293"/>
-        <location filename="../civrip.ui" line="327"/>
+        <location filename="../civrip.ui" line="345"/>
+        <location filename="../civrip.ui" line="379"/>
         <location filename="../civrip.cpp" line="86"/>
         <location filename="../civrip.cpp" line="103"/>
         <source>UNINST</source>
         <translation>未安装</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="306"/>
+        <location filename="../civrip.ui" line="358"/>
         <source>WinIPB:</source>
         <translation>WinIPB：</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="340"/>
+        <location filename="../civrip.ui" line="392"/>
         <source>TAP:</source>
         <translation>TAP：</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="353"/>
+        <location filename="../civrip.ui" line="405"/>
         <source>Refresh</source>
         <translation>刷新状态</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="366"/>
+        <location filename="../civrip.ui" line="418"/>
         <source>Install WinIPB</source>
         <translation>安装 WinIPB</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="379"/>
+        <location filename="../civrip.ui" line="431"/>
         <source>Install TAP</source>
         <translation>安装 TAP</translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="406"/>
+        <location filename="../civrip.ui" line="458"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/mxwxz/civrip/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Github&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../civrip.ui" line="422"/>
+        <location filename="../civrip.ui" line="474"/>
         <source>License: GPL-3.0</source>
         <translation></translation>
     </message>
@@ -175,6 +192,11 @@
         <location filename="../civrip.cpp" line="458"/>
         <source>Close application will disconnect from server, confirm?</source>
         <translation>退出程序会断开与服务器的连接，确认？</translation>
+    </message>
+    <message>
+        <location filename="../civrip.cpp" line="535"/>
+        <source>Eject</source>
+        <translation>弹出</translation>
     </message>
     <message>
         <location filename="../civrip.cpp" line="90"/>

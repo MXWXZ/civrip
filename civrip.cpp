@@ -460,3 +460,90 @@ void CivRIP::closeEvent(QCloseEvent *event) {
     event->accept();
   }
 }
+
+void CivRIP::on_pushButton_7_clicked() {
+  QProcess process;
+  process.startCommand("ping -w 2000 -n 2 " + ui->key_2->text());
+  process.waitForFinished(-1);
+  ui->output->append(process.readAll());
+}
+
+void CivRIP::on_inject_clicked() {
+  auto srvMgr = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
+  if (!srvMgr) {
+    ui->output->append(QString("OpenSCManager failed: %1").arg(GetLastError()));
+    ChangeWinIPB(STATUS_WINIPB_UNKNOWN);
+    return;
+  }
+
+  auto srvDDK = OpenService(srvMgr, _T("WinIPBroadcast"), SERVICE_ALL_ACCESS);
+  if (srvDDK) {
+    SERVICE_STATUS_PROCESS ssStatus;
+    if (!QueryService(srvMgr, srvDDK, &ssStatus)) {
+      ChangeWinIPB(STATUS_WINIPB_UNKNOWN);
+      return;
+    }
+
+    ControlService(srvDDK, SERVICE_CONTROL_STOP,
+                   (LPSERVICE_STATUS)&ssStatus); // ignore stop error
+    while (ssStatus.dwCurrentState != SERVICE_STOPPED) {
+      auto dwWaitTime = ssStatus.dwWaitHint / 10;
+      if (dwWaitTime < 1000)
+        dwWaitTime = 1000;
+      else if (dwWaitTime > 10000)
+        dwWaitTime = 10000;
+      Sleep(dwWaitTime);
+
+      if (!QueryService(srvMgr, srvDDK, &ssStatus)) {
+        ChangeWinIPB(STATUS_WINIPB_UNKNOWN);
+        return;
+      }
+      if (ssStatus.dwCurrentState == SERVICE_STOPPED)
+        break;
+    }
+    ui->output->append(QString("WinIPBroadcast Stopped"));
+    ChangeWinIPB(STATUS_WINIPB_STOPPED);
+    repaint();
+  } else {
+    ChangeWinIPB(STATUS_WINIPB_UNINSTALLED);
+  }
+
+  if (srvMgr)
+    CloseServiceHandle(srvMgr);
+  if (srvDDK)
+    CloseServiceHandle(srvDDK);
+
+  QFile file("address.txt");
+  file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
+  QTextStream out(&file);
+  out << ui->key_2->text();
+  file.close();
+
+  if (ui->inject->text() == tr("Inject")) {
+    QProcess process;
+    process.startCommand("Injector.exe -n CivilizationVI.exe -i hook.dll");
+    process.waitForFinished(-1);
+    ui->output->append(process.readAllStandardOutput());
+    ui->output->append(process.readAllStandardError());
+
+    process.startCommand("Injector.exe -n CivilizationVI_DX12.exe -i hook.dll");
+    process.waitForFinished(-1);
+    ui->output->append(process.readAllStandardOutput());
+    ui->output->append(process.readAllStandardError());
+
+    ui->inject->setText(tr("Eject"));
+  } else {
+    QProcess process;
+    process.startCommand("Injector.exe -n CivilizationVI.exe -e hook.dll");
+    process.waitForFinished(-1);
+    ui->output->append(process.readAllStandardOutput());
+    ui->output->append(process.readAllStandardError());
+
+    process.startCommand("Injector.exe -n CivilizationVI_DX12.exe -e hook.dll");
+    process.waitForFinished(-1);
+    ui->output->append(process.readAllStandardOutput());
+    ui->output->append(process.readAllStandardError());
+
+    ui->inject->setText(tr("Inject"));
+  }
+}

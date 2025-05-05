@@ -1,7 +1,7 @@
 #ifndef CIVRIP_H
 #define CIVRIP_H
 
-#define VERSION "1.0.0"
+#define VERSION "2.0.0"
 
 #include <QMainWindow>
 #include <QProcess>
@@ -69,7 +69,11 @@ private slots:
 
   void closeEvent(QCloseEvent *event) override;
 
-private:
+  void on_pushButton_7_clicked();
+
+  void on_inject_clicked();
+
+  private:
   QProcess edge;
   QTranslator *translator;
   Ui::CivRIP *ui;
